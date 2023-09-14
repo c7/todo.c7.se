@@ -1,0 +1,15 @@
+package pages
+
+import (
+	"github.com/c7/todo.c7.se/todo"
+	"github.com/c7/todo.c7.se/templates/partials"
+	"github.com/c7/todo.c7.se/templates/shared"
+)
+
+templ HomePage(list todo.List) {
+	@shared.Page("Home") {
+		@partials.Search("")
+		@partials.RenderTodos(list)
+		@partials.AddTodoForm()
+	}
+}

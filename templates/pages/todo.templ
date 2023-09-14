@@ -1,0 +1,13 @@
+package pages
+
+import (
+	"github.com/c7/todo.c7.se/todo"
+	"github.com/c7/todo.c7.se/templates/partials"
+	"github.com/c7/todo.c7.se/templates/shared"
+)
+
+templ TodoPage(item *todo.Item) {
+	@shared.Page("Todo") {
+		@partials.EditTodoForm(item)
+	}
+}
