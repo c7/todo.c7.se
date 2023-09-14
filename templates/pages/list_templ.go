@@ -15,7 +15,7 @@ import (
 	"github.com/c7/todo.c7.se/todo"
 )
 
-func TodosPage(list todo.List, term string) templ.Component {
+func List(list todo.List, term string) templ.Component {
 	return templ.ComponentFunc(func(ctx context.Context, w io.Writer) (err error) {
 		templBuffer, templIsBuffer := w.(*bytes.Buffer)
 		if !templIsBuffer {
@@ -42,7 +42,7 @@ func TodosPage(list todo.List, term string) templ.Component {
 			if err != nil {
 				return err
 			}
-			err = partials.RenderList(list).Render(ctx, templBuffer)
+			err = partials.List(list).Render(ctx, templBuffer)
 			if err != nil {
 				return err
 			}

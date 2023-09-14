@@ -44,7 +44,7 @@ func (h Handler) Home(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	if err := pages.HomePage(list).Render(r.Context(), w); err != nil {
+	if err := pages.Home(list).Render(r.Context(), w); err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 	}
 }
@@ -92,9 +92,9 @@ func (h Handler) Search(w http.ResponseWriter, r *http.Request) {
 	}
 
 	if isHTMX(r) {
-		err = partials.RenderList(list).Render(r.Context(), w)
+		err = partials.List(list).Render(r.Context(), w)
 	} else {
-		err = pages.TodosPage(list, search).Render(r.Context(), w)
+		err = pages.List(list, search).Render(r.Context(), w)
 	}
 
 	if err != nil {
@@ -117,7 +117,7 @@ func (h Handler) Create(w http.ResponseWriter, r *http.Request) {
 	}
 
 	if isHTMX(r) {
-		err = partials.RenderItem(item).Render(r.Context(), w)
+		err = partials.Item(item).Render(r.Context(), w)
 	} else {
 		http.Redirect(w, r, "/", http.StatusFound)
 	}
@@ -152,7 +152,7 @@ func (h Handler) Update(w http.ResponseWriter, r *http.Request) {
 	}
 
 	if isHTMX(r) {
-		err = partials.RenderItem(item).Render(r.Context(), w)
+		err = partials.Item(item).Render(r.Context(), w)
 	} else {
 		http.Redirect(w, r, "/", http.StatusFound)
 	}
@@ -183,7 +183,7 @@ func (h Handler) Get(w http.ResponseWriter, r *http.Request) {
 	if isHTMX(r) {
 		err = partials.EditItemForm(item).Render(r.Context(), w)
 	} else {
-		err = pages.TodoPage(item).Render(r.Context(), w)
+		err = pages.Item(item).Render(r.Context(), w)
 	}
 
 	if err != nil {

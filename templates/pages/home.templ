@@ -6,10 +6,10 @@ import (
 	"github.com/c7/todo.c7.se/templates/shared"
 )
 
-templ HomePage(list todo.List) {
+templ Home(list todo.List) {
 	@shared.Page("Home") {
 		@partials.Search("")
-		@partials.RenderList(list)
+		@partials.List(list)
 		@partials.AddItemForm()
 	}
 }

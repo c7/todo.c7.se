@@ -11,7 +11,7 @@ import "bytes"
 
 import "github.com/c7/todo.c7.se/todo"
 
-func RenderItem(item *todo.Item) templ.Component {
+func Item(item *todo.Item) templ.Component {
 	return templ.ComponentFunc(func(ctx context.Context, w io.Writer) (err error) {
 		templBuffer, templIsBuffer := w.(*bytes.Buffer)
 		if !templIsBuffer {

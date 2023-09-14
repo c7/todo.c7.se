@@ -2,7 +2,7 @@ package partials
 
 import "github.com/c7/todo.c7.se/todo"
 
-templ RenderItem(item *todo.Item) {
+templ Item(item *todo.Item) {
 	<div class="block py-2 border-b-4 border-dotted border-red-900 draggable">
 		<form
 			method="POST"

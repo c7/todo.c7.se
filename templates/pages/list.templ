@@ -6,8 +6,10 @@ import (
 	"github.com/c7/todo.c7.se/templates/shared"
 )
 
-templ TodoPage(item *todo.Item) {
-	@shared.Page("Todo") {
-		@partials.EditItemForm(item)
+templ List(list todo.List, term string) {
+	@shared.Page("Home") {
+		@partials.Search(term)
+		@partials.List(list)
+		@partials.AddItemForm()
 	}
 }

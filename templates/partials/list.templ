@@ -2,7 +2,7 @@ package partials
 
 import "github.com/c7/todo.c7.se/todo"
 
-templ RenderList(list todo.List) {
+templ List(list todo.List) {
 	<form
 		hx-post="/items/sort"
 		hx-trigger="end"
@@ -10,7 +10,7 @@ templ RenderList(list todo.List) {
 	>
 		<div id="items" class=" sortable">
 			for _, item := range list {
-				@RenderItem(item)
+				@Item(item)
 			}
 			<div id="no-items" class="hidden first:block first:pb-2 first:pt-3">
 				<p>Congrats, you have no more TODO items! Or... do you? 🤔</p>
