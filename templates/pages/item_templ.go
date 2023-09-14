@@ -43,7 +43,7 @@ func Item(item *todo.Item) templ.Component {
 			}
 			return err
 		})
-		err = shared.Page("Todo").Render(templ.WithChildren(ctx, var_2), templBuffer)
+		err = shared.Page("Item").Render(templ.WithChildren(ctx, var_2), templBuffer)
 		if err != nil {
 			return err
 		}

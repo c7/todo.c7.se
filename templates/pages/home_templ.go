@@ -59,7 +59,7 @@ func Home(list todo.List) templ.Component {
 			}
 			return err
 		})
-		err = shared.Page("Home").Render(templ.WithChildren(ctx, var_2), templBuffer)
+		err = shared.Page("Todo").Render(templ.WithChildren(ctx, var_2), templBuffer)
 		if err != nil {
 			return err
 		}
