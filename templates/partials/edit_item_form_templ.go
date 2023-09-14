@@ -24,25 +24,7 @@ func EditItemForm(item *todo.Item) templ.Component {
 			var_1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, err = templBuffer.WriteString("<div class=\"block py-2 border-b-4 border-dotted border-red-900 draggable\"><button disabled=\"disabled\" class=\"mr-2\">")
-		if err != nil {
-			return err
-		}
-		var_2 := `❌`
-		_, err = templBuffer.WriteString(var_2)
-		if err != nil {
-			return err
-		}
-		_, err = templBuffer.WriteString("</button><button disabled=\"disabled\" class=\"mr-2\">")
-		if err != nil {
-			return err
-		}
-		var_3 := `📝`
-		_, err = templBuffer.WriteString(var_3)
-		if err != nil {
-			return err
-		}
-		_, err = templBuffer.WriteString("</button><input type=\"hidden\" name=\"id\" value=\"")
+		_, err = templBuffer.WriteString("<div class=\"block draggable\"><input type=\"hidden\" name=\"id\" value=\"")
 		if err != nil {
 			return err
 		}
@@ -66,7 +48,7 @@ func EditItemForm(item *todo.Item) templ.Component {
 		if err != nil {
 			return err
 		}
-		_, err = templBuffer.WriteString("\" class=\"inline\"><input type=\"hidden\" name=\"completed\"")
+		_, err = templBuffer.WriteString("\" class=\"\"><input type=\"hidden\" name=\"completed\"")
 		if err != nil {
 			return err
 		}

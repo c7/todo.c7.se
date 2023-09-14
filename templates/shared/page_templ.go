@@ -22,7 +22,7 @@ func Page(title string) templ.Component {
 			var_1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, err = templBuffer.WriteString("<!doctype html><html lang=\"en\" class=\"h-full\"><head><meta charset=\"UTF-8\"><title>")
+		_, err = templBuffer.WriteString("<!doctype html><html lang=\"en\"><head><meta charset=\"UTF-8\"><title>")
 		if err != nil {
 			return err
 		}
@@ -67,16 +67,65 @@ func Page(title string) templ.Component {
 		if err != nil {
 			return err
 		}
-		_, err = templBuffer.WriteString("</script><link rel=\"stylesheet\" href=\"/dist/styles.css\"></head><body class=\"h-full bg-yellow-50 font-mono\"><section class=\"max-w-lg mx-auto my-2\"><h1 class=\"text-8xl font-black text-center m-0 pb-2\">")
+		_, err = templBuffer.WriteString("</script><link rel=\"stylesheet\" href=\"/dist/pico.min.css\"><style>")
 		if err != nil {
 			return err
 		}
-		var_7 := `Todo`
+		var_7 := `
+        .hidden {
+          display: none;
+        }
+
+        .line-through {
+          text-decoration: line-through;
+        }
+
+        .block {
+          height: 72px;
+        }
+
+        .right {
+          float: right;
+        }
+
+        .btn {
+          margin-right: 12px;
+          width: 32px;
+          height: 32px;
+        }
+      `
 		_, err = templBuffer.WriteString(var_7)
 		if err != nil {
 			return err
 		}
-		_, err = templBuffer.WriteString("</h1>")
+		_, err = templBuffer.WriteString("</style></head><body><main class=\"container\"><article class=\"grid\"><div><hgroup><h1>")
+		if err != nil {
+			return err
+		}
+		var_8 := `Todo`
+		_, err = templBuffer.WriteString(var_8)
+		if err != nil {
+			return err
+		}
+		_, err = templBuffer.WriteString("</h1><h2>")
+		if err != nil {
+			return err
+		}
+		var_9 := `An example application available to download from `
+		_, err = templBuffer.WriteString(var_9)
+		if err != nil {
+			return err
+		}
+		_, err = templBuffer.WriteString("<a href=\"https://github.com/c7/todo.c7.se/\">")
+		if err != nil {
+			return err
+		}
+		var_10 := `https://github.com/c7/todo.c7.se/`
+		_, err = templBuffer.WriteString(var_10)
+		if err != nil {
+			return err
+		}
+		_, err = templBuffer.WriteString("</a></h2></hgroup>")
 		if err != nil {
 			return err
 		}
@@ -84,7 +133,7 @@ func Page(title string) templ.Component {
 		if err != nil {
 			return err
 		}
-		_, err = templBuffer.WriteString("</section></body></html>")
+		_, err = templBuffer.WriteString("</div></article></main></body></html>")
 		if err != nil {
 			return err
 		}
