@@ -26,7 +26,7 @@ func AddItemForm() templ.Component {
 		if err != nil {
 			return err
 		}
-		var_2 := `Add TODO Item`
+		var_2 := `Add Item`
 		_, err = templBuffer.WriteString(var_2)
 		if err != nil {
 			return err
