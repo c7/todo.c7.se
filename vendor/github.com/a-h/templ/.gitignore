@@ -1,0 +1,10 @@
+cmd/example/*.go
+dist/
+cmd/templ/templ
+cmd/templ/lspcmd/*log.txt
+.DS_Store
+coverage.out
+coverage
+docs/build/
+docs/resources/_gen/
+node_modules/
