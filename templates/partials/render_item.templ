@@ -2,18 +2,18 @@ package partials
 
 import "github.com/c7/todo.c7.se/todo"
 
-templ RenderTodo(item *todo.Item) {
+templ RenderItem(item *todo.Item) {
 	<div class="block py-2 border-b-4 border-dotted border-red-900 draggable">
 		<form
 			method="POST"
-			action={ "/todos/"+item.ID.String()+"/delete" }
+			action={ "/items/"+item.ID.String()+"/delete" }
 			class="inline"
 		>
 			<button
 				type="submit"
 				hx-target="closest div"
 				hx-swap="outerHTML"
-				hx-delete={ "/todos/"+item.ID.String() }
+				hx-delete={ "/items/"+item.ID.String() }
 				class="focus:outline focus:outline-red-500 focus:outline-4 mr-2"
 			>
 				❌
@@ -21,14 +21,14 @@ templ RenderTodo(item *todo.Item) {
 		</form>
 		<form
 			method="GET"
-			action={ "/todos/"+item.ID.String() }
+			action={ "/items/"+item.ID.String() }
 			class="inline"
     >
 			<button
 				type="submit"
 				hx-target="closest div"
 				hx-swap="outerHTML"
-				hx-get={ "/todos/"+item.ID.String() }
+				hx-get={ "/items/"+item.ID.String() }
 				class="focus:outline focus:outline-red-500 focus:outline-4 mr-2"
 			>
 				📝
@@ -36,7 +36,7 @@ templ RenderTodo(item *todo.Item) {
 		</form>
 		<form
 			method="POST"
-			action={ "/todos/"+item.ID.String()+"/edit" }
+			action={ "/items/"+item.ID.String()+"/edit" }
 			hx-target="closest div"
 			hx-swap="outerHTML"
 			class={ "inline", templ.KV("line-through", item.Completed) }
@@ -66,7 +66,7 @@ templ RenderTodo(item *todo.Item) {
 					class="mr-2"
 				/>
 			</noscript>
-			<span hx-patch={ "/todos/"+item.ID.String() }>
+			<span hx-patch={ "/items/"+item.ID.String() }>
 				{ item.Description }
 			</span>
 		</form>

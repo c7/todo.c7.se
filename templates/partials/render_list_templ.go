@@ -11,7 +11,7 @@ import "bytes"
 
 import "github.com/c7/todo.c7.se/todo"
 
-func RenderTodos(list todo.List) templ.Component {
+func RenderList(list todo.List) templ.Component {
 	return templ.ComponentFunc(func(ctx context.Context, w io.Writer) (err error) {
 		templBuffer, templIsBuffer := w.(*bytes.Buffer)
 		if !templIsBuffer {
@@ -24,21 +24,21 @@ func RenderTodos(list todo.List) templ.Component {
 			var_1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, err = templBuffer.WriteString("<form hx-post=\"/todos/sort\" hx-trigger=\"end\" class=\"block p-0 mb-2 text-lg\"><div id=\"todos\" class=\" sortable\">")
+		_, err = templBuffer.WriteString("<form hx-post=\"/items/sort\" hx-trigger=\"end\" class=\"block p-0 mb-2 text-lg\"><div id=\"items\" class=\" sortable\">")
 		if err != nil {
 			return err
 		}
 		for _, item := range list {
-			err = RenderTodo(item).Render(ctx, templBuffer)
+			err = RenderItem(item).Render(ctx, templBuffer)
 			if err != nil {
 				return err
 			}
 		}
-		_, err = templBuffer.WriteString("<div id=\"no-todos\" class=\"hidden first:block first:pb-2 first:pt-3\"><p>")
+		_, err = templBuffer.WriteString("<div id=\"no-items\" class=\"hidden first:block first:pb-2 first:pt-3\"><p>")
 		if err != nil {
 			return err
 		}
-		var_2 := `Congrats, you have no todos! Or... do you? 😰`
+		var_2 := `Congrats, you have no more TODO items! Or... do you? 🤔`
 		_, err = templBuffer.WriteString(var_2)
 		if err != nil {
 			return err

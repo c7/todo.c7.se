@@ -9,7 +9,7 @@ import (
 templ TodosPage(list todo.List, term string) {
 	@shared.Page("Home") {
 		@partials.Search(term)
-		@partials.RenderTodos(list)
-		@partials.AddTodoForm()
+		@partials.RenderList(list)
+		@partials.AddItemForm()
 	}
 }

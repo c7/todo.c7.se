@@ -1,16 +1,16 @@
 package partials
 
-templ AddTodoForm() {
+templ AddItemForm() {
 	<form
 		method="POST"
-		action="/todos"
-		hx-post="/todos"
-		hx-target="#no-todos"
+		action="/items"
+		hx-post="/items"
+		hx-target="#no-items"
 		hx-swap="beforebegin"
 		class="inline"
 	>
 		<label class="flex items-center">
-			<span class="text-lg font-bold">Add Todo</span>
+			<span class="text-lg font-bold">Add TODO Item</span>
 			<input
 				type="text"
 				name="description"

@@ -9,7 +9,7 @@ import "context"
 import "io"
 import "bytes"
 
-func AddTodoForm() templ.Component {
+func AddItemForm() templ.Component {
 	return templ.ComponentFunc(func(ctx context.Context, w io.Writer) (err error) {
 		templBuffer, templIsBuffer := w.(*bytes.Buffer)
 		if !templIsBuffer {
@@ -22,11 +22,11 @@ func AddTodoForm() templ.Component {
 			var_1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, err = templBuffer.WriteString("<form method=\"POST\" action=\"/todos\" hx-post=\"/todos\" hx-target=\"#no-todos\" hx-swap=\"beforebegin\" class=\"inline\"><label class=\"flex items-center\"><span class=\"text-lg font-bold\">")
+		_, err = templBuffer.WriteString("<form method=\"POST\" action=\"/items\" hx-post=\"/items\" hx-target=\"#no-items\" hx-swap=\"beforebegin\" class=\"inline\"><label class=\"flex items-center\"><span class=\"text-lg font-bold\">")
 		if err != nil {
 			return err
 		}
-		var_2 := `Add Todo`
+		var_2 := `Add TODO Item`
 		_, err = templBuffer.WriteString(var_2)
 		if err != nil {
 			return err

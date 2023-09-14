@@ -11,7 +11,7 @@ import "bytes"
 
 import "github.com/c7/todo.c7.se/todo"
 
-func EditTodoForm(item *todo.Item) templ.Component {
+func EditItemForm(item *todo.Item) templ.Component {
 	return templ.ComponentFunc(func(ctx context.Context, w io.Writer) (err error) {
 		templBuffer, templIsBuffer := w.(*bytes.Buffer)
 		if !templIsBuffer {
@@ -54,7 +54,7 @@ func EditTodoForm(item *todo.Item) templ.Component {
 		if err != nil {
 			return err
 		}
-		_, err = templBuffer.WriteString(templ.EscapeString("/todos/" + item.ID.String() + "/edit"))
+		_, err = templBuffer.WriteString(templ.EscapeString("/items/" + item.ID.String() + "/edit"))
 		if err != nil {
 			return err
 		}
@@ -62,7 +62,7 @@ func EditTodoForm(item *todo.Item) templ.Component {
 		if err != nil {
 			return err
 		}
-		_, err = templBuffer.WriteString(templ.EscapeString("/todos/" + item.ID.String()))
+		_, err = templBuffer.WriteString(templ.EscapeString("/items/" + item.ID.String()))
 		if err != nil {
 			return err
 		}

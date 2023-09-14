@@ -42,7 +42,7 @@ func HomePage(list todo.List) templ.Component {
 			if err != nil {
 				return err
 			}
-			err = partials.RenderTodos(list).Render(ctx, templBuffer)
+			err = partials.RenderList(list).Render(ctx, templBuffer)
 			if err != nil {
 				return err
 			}
@@ -50,7 +50,7 @@ func HomePage(list todo.List) templ.Component {
 			if err != nil {
 				return err
 			}
-			err = partials.AddTodoForm().Render(ctx, templBuffer)
+			err = partials.AddItemForm().Render(ctx, templBuffer)
 			if err != nil {
 				return err
 			}

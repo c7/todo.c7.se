@@ -2,17 +2,17 @@ package partials
 
 import "github.com/c7/todo.c7.se/todo"
 
-templ EditTodoForm(item *todo.Item) {
+templ EditItemForm(item *todo.Item) {
 	<div class="block py-2 border-b-4 border-dotted border-red-900 draggable">
 		<button disabled="disabled" class="mr-2">❌</button>
 		<button disabled="disabled" class="mr-2">📝</button>
 		<input type="hidden" name="id" value={ item.ID.String() } />
 		<form
 			method="POST"
-			action={ "/todos/"+item.ID.String()+"/edit" }
+			action={ "/items/"+item.ID.String()+"/edit" }
 			hx-target="closest div"
 			hx-swap="outerHTML"
-			hx-patch={ "/todos/"+item.ID.String() }
+			hx-patch={ "/items/"+item.ID.String() }
 			class="inline"
 		>
 			<input

@@ -1,7 +1,7 @@
 package partials
 
 templ Search(term string) {
-	<form method="GET" action="/todos" class="inline [&:has(+ul:empty)]:hidden">
+	<form method="GET" action="/items" class="inline [&:has(+ul:empty)]:hidden">
 		<label class="flex items-center">
 			<span class="text-lg font-bold">Search</span>
 			<input
@@ -10,8 +10,8 @@ templ Search(term string) {
 				value={ term }
 				type="text"
 				placeholder="Begin typing to search..."
-				hx-get="/todos"
-				hx-target="#todos"
+				hx-get="/items"
+				hx-target="#items"
 				hx-trigger="keyup changed, search"
 				hx-replace="innerHTML"
 				class="ml-2 grow"

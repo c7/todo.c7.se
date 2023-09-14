@@ -23,10 +23,10 @@ func NewHandler(service todo.Service) *Handler {
 
 func Mount(r chi.Router, h todo.Handler) {
 	r.Get("/", h.Home)
-	r.Route("/todos", func(r chi.Router) {
+	r.Route("/items", func(r chi.Router) {
 		r.Get("/", h.Search)
 		r.Post("/", h.Create)
-		r.Route("/{todoId}", func(r chi.Router) {
+		r.Route("/{ID}", func(r chi.Router) {
 			r.Patch("/", h.Update)
 			r.Post("/edit", h.Update)
 			r.Get("/", h.Get)
@@ -50,47 +50,53 @@ func (h Handler) Home(w http.ResponseWriter, r *http.Request) {
 }
 
 func (h Handler) Sort(w http.ResponseWriter, r *http.Request) {
-	var todoIDs []uuid.UUID
+	var itemIDs []uuid.UUID
+
 	if err := r.ParseForm(); err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
+
 	for _, id := range r.Form["id"] {
-		var todoID uuid.UUID
+		var itemID uuid.UUID
+
 		var err error
-		if todoID, err = uuid.Parse(id); err != nil {
+
+		if itemID, err = uuid.Parse(id); err != nil {
 			http.Error(w, err.Error(), http.StatusBadRequest)
 			return
 		}
-		todoIDs = append(todoIDs, todoID)
+
+		itemIDs = append(itemIDs, itemID)
 	}
-	if err := h.service.Sort(r.Context(), todoIDs); err != nil {
+
+	if err := h.service.Sort(r.Context(), itemIDs); err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
 
-	switch isHTMX(r) {
-	case true:
+	if isHTMX(r) {
 		w.WriteHeader(http.StatusNoContent)
-	default:
+	} else {
 		http.Redirect(w, r, "/", http.StatusFound)
 	}
 }
 
 func (h Handler) Search(w http.ResponseWriter, r *http.Request) {
 	var search = r.URL.Query().Get("search")
-	todos, err := h.service.Search(r.Context(), search)
+
+	list, err := h.service.Search(r.Context(), search)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
 
-	switch isHTMX(r) {
-	case true:
-		err = partials.RenderTodos(todos).Render(r.Context(), w)
-	default:
-		err = pages.TodosPage(todos, search).Render(r.Context(), w)
+	if isHTMX(r) {
+		err = partials.RenderList(list).Render(r.Context(), w)
+	} else {
+		err = pages.TodosPage(list, search).Render(r.Context(), w)
 	}
+
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 	}
@@ -101,18 +107,18 @@ func (h Handler) Create(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
+
 	var description = r.Form.Get("description")
 
-	todo, err := h.service.Add(r.Context(), description)
+	item, err := h.service.Add(r.Context(), description)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
 
-	switch isHTMX(r) {
-	case true:
-		err = partials.RenderTodo(todo).Render(r.Context(), w)
-	default:
+	if isHTMX(r) {
+		err = partials.RenderItem(item).Render(r.Context(), w)
+	} else {
 		http.Redirect(w, r, "/", http.StatusFound)
 	}
 
@@ -122,10 +128,13 @@ func (h Handler) Create(w http.ResponseWriter, r *http.Request) {
 }
 
 func (h Handler) Update(w http.ResponseWriter, r *http.Request) {
-	var id = chi.URLParam(r, "todoId")
-	var todoID uuid.UUID
+	var id = chi.URLParam(r, "ID")
+
+	var itemID uuid.UUID
+
 	var err error
-	if todoID, err = uuid.Parse(id); err != nil {
+
+	if itemID, err = uuid.Parse(id); err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
@@ -136,66 +145,72 @@ func (h Handler) Update(w http.ResponseWriter, r *http.Request) {
 	var completed = r.Form.Get("completed") == "true"
 	var description = r.Form.Get("description")
 
-	todo, err := h.service.Update(r.Context(), todoID, completed, description)
+	item, err := h.service.Update(r.Context(), itemID, completed, description)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
 
-	switch isHTMX(r) {
-	case true:
-		err = partials.RenderTodo(todo).Render(r.Context(), w)
-	default:
+	if isHTMX(r) {
+		err = partials.RenderItem(item).Render(r.Context(), w)
+	} else {
 		http.Redirect(w, r, "/", http.StatusFound)
 	}
+
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 	}
 }
 
 func (h Handler) Get(w http.ResponseWriter, r *http.Request) {
-	var id = chi.URLParam(r, "todoId")
-	var todoID uuid.UUID
+	var id = chi.URLParam(r, "ID")
+
+	var itemID uuid.UUID
+
 	var err error
-	if todoID, err = uuid.Parse(id); err != nil {
+
+	if itemID, err = uuid.Parse(id); err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
-	todo, err := h.service.Get(r.Context(), todoID)
+
+	item, err := h.service.Get(r.Context(), itemID)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
 
-	switch isHTMX(r) {
-	case true:
-		err = partials.EditTodoForm(todo).Render(r.Context(), w)
-	default:
-		err = pages.TodoPage(todo).Render(r.Context(), w)
+	if isHTMX(r) {
+		err = partials.EditItemForm(item).Render(r.Context(), w)
+	} else {
+		err = pages.TodoPage(item).Render(r.Context(), w)
 	}
+
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 	}
 }
 
 func (h Handler) Delete(w http.ResponseWriter, r *http.Request) {
-	var id = chi.URLParam(r, "todoId")
-	var todoID uuid.UUID
+	var id = chi.URLParam(r, "ID")
+
+	var itemID uuid.UUID
+
 	var err error
-	if todoID, err = uuid.Parse(id); err != nil {
+
+	if itemID, err = uuid.Parse(id); err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
 
-	if err := h.service.Remove(r.Context(), todoID); err != nil {
+	if err := h.service.Remove(r.Context(), itemID); err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
 
-	switch isHTMX(r) {
-	case true:
+	if isHTMX(r) {
 		_, err = w.Write([]byte(""))
-	default:
+	} else {
 		http.Redirect(w, r, "/", http.StatusFound)
 	}
 
@@ -206,9 +221,5 @@ func (h Handler) Delete(w http.ResponseWriter, r *http.Request) {
 
 func isHTMX(r *http.Request) bool {
 	// Check for "HX-Request" header
-	if r.Header.Get("HX-Request") != "" {
-		return true
-	}
-
-	return false
+	return r.Header.Get("HX-Request") != ""
 }

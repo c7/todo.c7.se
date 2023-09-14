@@ -34,7 +34,7 @@ func TodoPage(item *todo.Item) templ.Component {
 				templBuffer = templ.GetBuffer()
 				defer templ.ReleaseBuffer(templBuffer)
 			}
-			err = partials.EditTodoForm(item).Render(ctx, templBuffer)
+			err = partials.EditItemForm(item).Render(ctx, templBuffer)
 			if err != nil {
 				return err
 			}

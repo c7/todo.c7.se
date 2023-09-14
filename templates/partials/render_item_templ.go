@@ -11,7 +11,7 @@ import "bytes"
 
 import "github.com/c7/todo.c7.se/todo"
 
-func RenderTodo(item *todo.Item) templ.Component {
+func RenderItem(item *todo.Item) templ.Component {
 	return templ.ComponentFunc(func(ctx context.Context, w io.Writer) (err error) {
 		templBuffer, templIsBuffer := w.(*bytes.Buffer)
 		if !templIsBuffer {
@@ -28,7 +28,7 @@ func RenderTodo(item *todo.Item) templ.Component {
 		if err != nil {
 			return err
 		}
-		_, err = templBuffer.WriteString(templ.EscapeString("/todos/" + item.ID.String() + "/delete"))
+		_, err = templBuffer.WriteString(templ.EscapeString("/items/" + item.ID.String() + "/delete"))
 		if err != nil {
 			return err
 		}
@@ -36,7 +36,7 @@ func RenderTodo(item *todo.Item) templ.Component {
 		if err != nil {
 			return err
 		}
-		_, err = templBuffer.WriteString(templ.EscapeString("/todos/" + item.ID.String()))
+		_, err = templBuffer.WriteString(templ.EscapeString("/items/" + item.ID.String()))
 		if err != nil {
 			return err
 		}
@@ -53,7 +53,7 @@ func RenderTodo(item *todo.Item) templ.Component {
 		if err != nil {
 			return err
 		}
-		_, err = templBuffer.WriteString(templ.EscapeString("/todos/" + item.ID.String()))
+		_, err = templBuffer.WriteString(templ.EscapeString("/items/" + item.ID.String()))
 		if err != nil {
 			return err
 		}
@@ -61,7 +61,7 @@ func RenderTodo(item *todo.Item) templ.Component {
 		if err != nil {
 			return err
 		}
-		_, err = templBuffer.WriteString(templ.EscapeString("/todos/" + item.ID.String()))
+		_, err = templBuffer.WriteString(templ.EscapeString("/items/" + item.ID.String()))
 		if err != nil {
 			return err
 		}
@@ -87,7 +87,7 @@ func RenderTodo(item *todo.Item) templ.Component {
 		if err != nil {
 			return err
 		}
-		_, err = templBuffer.WriteString(templ.EscapeString("/todos/" + item.ID.String() + "/edit"))
+		_, err = templBuffer.WriteString(templ.EscapeString("/items/" + item.ID.String() + "/edit"))
 		if err != nil {
 			return err
 		}
@@ -141,7 +141,7 @@ func RenderTodo(item *todo.Item) templ.Component {
 		if err != nil {
 			return err
 		}
-		_, err = templBuffer.WriteString(templ.EscapeString("/todos/" + item.ID.String()))
+		_, err = templBuffer.WriteString(templ.EscapeString("/items/" + item.ID.String()))
 		if err != nil {
 			return err
 		}

@@ -6,23 +6,23 @@ type Handler interface {
 	// Home : GET /
 	Home(w http.ResponseWriter, r *http.Request)
 
-	// Search : GET /todos
+	// Search : GET /items
 	Search(w http.ResponseWriter, r *http.Request)
 
-	// Create : POST /todos
+	// Create : POST /items
 	Create(w http.ResponseWriter, r *http.Request)
 
-	// Update : PATCH /todos/{todoId}
-	// Update : POST /todos/{todoId}/edit
+	// Update : PATCH /items/{ID}
+	// Update : POST /items/{ID}/edit
 	Update(w http.ResponseWriter, r *http.Request)
 
-	// Get : GET /todos/{todoId}
+	// Get : GET /items/{ID}
 	Get(w http.ResponseWriter, r *http.Request)
 
-	// Delete : DELETE /todos/{todoId}
-	// Delete : POST /todos/{todoId}/delete
+	// Delete : DELETE /items/{ID}
+	// Delete : POST /items/{ID}/delete
 	Delete(w http.ResponseWriter, r *http.Request)
 
-	// Sort : POST /todos/sort
+	// Sort : POST /items/sort
 	Sort(w http.ResponseWriter, r *http.Request)
 }
