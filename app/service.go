@@ -3,8 +3,9 @@ package app
 import (
 	"context"
 
-	"github.com/c7/todo.c7.se/todo"
 	"github.com/google/uuid"
+
+	"github.com/c7/todo.c7.se/todo"
 )
 
 type Service struct {
