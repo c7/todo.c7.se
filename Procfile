@@ -1,1 +1,1 @@
-web: bin/todo
+web: bin/todo.c7.se
