@@ -1,6 +1,6 @@
 module github.com/c7/todo.c7.se
 
-go 1.21.1
+go 1.21.0
 
 require (
 	github.com/a-h/templ v0.2.334
