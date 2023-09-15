@@ -22,7 +22,7 @@ func Search(term string) templ.Component {
 			var_1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, err = templBuffer.WriteString("<form method=\"GET\" action=\"/items\" class=\"inline [&amp;:has(+ul:empty)]:hidden\"><label><span>")
+		_, err = templBuffer.WriteString("<form method=\"GET\" action=\"/items\" class=\"[&amp;:has(+ul:empty)]:hidden\"><label><span>")
 		if err != nil {
 			return err
 		}
@@ -31,7 +31,7 @@ func Search(term string) templ.Component {
 		if err != nil {
 			return err
 		}
-		_, err = templBuffer.WriteString("</span><input id=\"search\" name=\"search\" value=\"")
+		_, err = templBuffer.WriteString("</span><input id=\"search\" name=\"search\" type=\"search\" value=\"")
 		if err != nil {
 			return err
 		}

@@ -42,7 +42,7 @@ func List(list todo.List, term string) templ.Component {
 			if err != nil {
 				return err
 			}
-			err = partials.List(list).Render(ctx, templBuffer)
+			err = partials.AddItemForm().Render(ctx, templBuffer)
 			if err != nil {
 				return err
 			}
@@ -50,7 +50,7 @@ func List(list todo.List, term string) templ.Component {
 			if err != nil {
 				return err
 			}
-			err = partials.AddItemForm().Render(ctx, templBuffer)
+			err = partials.List(list).Render(ctx, templBuffer)
 			if err != nil {
 				return err
 			}

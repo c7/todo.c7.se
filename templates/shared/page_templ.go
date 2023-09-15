@@ -31,7 +31,7 @@ func Page(title string) templ.Component {
 		if err != nil {
 			return err
 		}
-		_, err = templBuffer.WriteString("</title><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"><meta name=\"robots\" content=\"index, follow\"><meta name=\"revisit-after\" content=\"7 days\"><meta name=\"language\" content=\"English\"><script src=\"https://unpkg.com/htmx.org@1.9.2\" integrity=\"sha384-L6OqL9pRWyyFU3+/bjdSri+iIphTN/bvYyM37tICVyOJkWZLpP2vGn6VUEXgzg6h\" crossorigin=\"anonymous\">")
+		_, err = templBuffer.WriteString("</title><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"><script src=\"/dist/htmx.min.js\">")
 		if err != nil {
 			return err
 		}
@@ -40,7 +40,7 @@ func Page(title string) templ.Component {
 		if err != nil {
 			return err
 		}
-		_, err = templBuffer.WriteString("</script><script src=\"https://unpkg.com/hyperscript.org@0.9.8\">")
+		_, err = templBuffer.WriteString("</script><script src=\"/dist/_hyperscript.min.js\">")
 		if err != nil {
 			return err
 		}
@@ -49,7 +49,7 @@ func Page(title string) templ.Component {
 		if err != nil {
 			return err
 		}
-		_, err = templBuffer.WriteString("</script><script src=\"https://unpkg.com/sortablejs@1.15.0\">")
+		_, err = templBuffer.WriteString("</script><script src=\"/dist/sortable.min.js\">")
 		if err != nil {
 			return err
 		}
@@ -67,7 +67,7 @@ func Page(title string) templ.Component {
 		if err != nil {
 			return err
 		}
-		_, err = templBuffer.WriteString("</script><link rel=\"stylesheet\" href=\"/dist/pico.min.css\"><style>")
+		_, err = templBuffer.WriteString("</script><link rel=\"stylesheet\" href=\"/dist/pico.min.css\"><link rel=\"stylesheet\" href=\"/dist/pico.colors.min.css\"><style>")
 		if err != nil {
 			return err
 		}
@@ -77,21 +77,21 @@ func Page(title string) templ.Component {
         }
 
         .line-through {
-          text-decoration: line-through;
+          text-decoration: line-through dashed;
+          text-decoration-thickness: 0.3rem;
+          text-decoration-style: wavy;
+          text-decoration-color: #cccccc;
         }
 
-        .block {
-          height: 72px;
+        .sortable-ghost {
+          background-color: #13171f;
+          outline-style: dashed;
+          outline-color: var(--pico-border-color);
+          outline-width: thick;
         }
 
-        .right {
-          float: right;
-        }
-
-        .btn {
-          margin-right: 12px;
-          width: 32px;
-          height: 32px;
+        strong {
+          font-size: 1.5rem;
         }
       `
 		_, err = templBuffer.WriteString(var_7)

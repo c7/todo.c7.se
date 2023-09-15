@@ -1,12 +1,13 @@
 package partials
 
 templ Search(term string) {
-  <form method="GET" action="/items" class="inline [&:has(+ul:empty)]:hidden">
+  <form method="GET" action="/items" class="[&:has(+ul:empty)]:hidden">
     <label>
       <span>Search</span>
       <input
         id="search"
         name="search"
+        type="search"
         value={ term }
         type="text"
         placeholder="Begin typing to search..."

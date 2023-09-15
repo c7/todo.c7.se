@@ -3,18 +3,18 @@ package partials
 import "github.com/c7/todo.c7.se/todo"
 
 templ List(list todo.List) {
-  <form
-    hx-post="/items/sort"
-    hx-trigger="end"
-    class=""
-  >
-    <div id="items" class="sortable">
-      for _, item := range list {
-        @Item(item)
-      }
-      <div id="no-items" class="hidden">
-        <p>Congrats, you have no more TODO items! Or... do you? 🤔</p>
-      </div>
-    </div>
-  </form>
+	<form
+		hx-post="/items/sort"
+		hx-trigger="end"
+		class="block p-0 mb-2 text-lg"
+	>
+		<div id="items" class=" sortable">
+			for _, item := range list {
+				@Item(item)
+			}
+			<div id="no-items" class="hidden first:block first:pb-2 first:pt-3">
+				<p>Congrats, you have no more TODO items! Or... do you? 🤔</p>
+			</div>
+		</div>
+	</form>
 }

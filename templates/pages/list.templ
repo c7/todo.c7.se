@@ -9,7 +9,7 @@ import (
 templ List(list todo.List, term string) {
 	@shared.Page("List") {
 		@partials.Search(term)
-		@partials.List(list)
 		@partials.AddItemForm()
+		@partials.List(list)
 	}
 }

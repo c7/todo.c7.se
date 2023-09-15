@@ -7,15 +7,16 @@ templ AddItemForm() {
 		hx-post="/items"
 		hx-target="#no-items"
 		hx-swap="beforebegin"
-		class=""
+		class="inline"
 	>
-		<label class="">
+		<label class="flex items-center">
 			<span class="">Add Item</span>
 			<input
 				type="text"
 				name="description"
-				class=""
-				data-script="on keyup if the event's key is 'Enter' set my value to '' trigger keyup"
+				class="ml-2 grow"
+				aria-invalid="false"
+        data-script="on keyup if the event's key is 'Enter' set my value to '' trigger keyup"
 			/>
 		</label>
 	</form>

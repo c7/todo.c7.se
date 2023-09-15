@@ -24,7 +24,32 @@ func Item(item *todo.Item) templ.Component {
 			var_1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, err = templBuffer.WriteString("<div class=\"draggable\"><form method=\"POST\" action=\"")
+		_, err = templBuffer.WriteString("<div class=\"block py-2 border-b-4 border-dotted border-red-900 draggable\"><nav><ul style=\"width: 100%;\"><li><form method=\"GET\" action=\"")
+		if err != nil {
+			return err
+		}
+		_, err = templBuffer.WriteString(templ.EscapeString("/items/" + item.ID.String()))
+		if err != nil {
+			return err
+		}
+		_, err = templBuffer.WriteString("\" class=\"inline\"><button type=\"submit\" hx-target=\"closest div\" hx-swap=\"outerHTML\" hx-get=\"")
+		if err != nil {
+			return err
+		}
+		_, err = templBuffer.WriteString(templ.EscapeString("/items/" + item.ID.String()))
+		if err != nil {
+			return err
+		}
+		_, err = templBuffer.WriteString("\" class=\"outline primary focus:outline focus:outline-red-500 focus:outline-4 mr-2\">")
+		if err != nil {
+			return err
+		}
+		var_2 := `📝`
+		_, err = templBuffer.WriteString(var_2)
+		if err != nil {
+			return err
+		}
+		_, err = templBuffer.WriteString("</button></form></li><li><form method=\"POST\" action=\"")
 		if err != nil {
 			return err
 		}
@@ -32,7 +57,7 @@ func Item(item *todo.Item) templ.Component {
 		if err != nil {
 			return err
 		}
-		_, err = templBuffer.WriteString("\" class=\"inline\" role=\"group\"><button type=\"submit\" hx-target=\"closest div\" hx-swap=\"outerHTML\" hx-delete=\"")
+		_, err = templBuffer.WriteString("\" class=\"inline\"><button type=\"submit\" hx-target=\"closest div\" hx-swap=\"outerHTML\" hx-delete=\"")
 		if err != nil {
 			return err
 		}
@@ -40,41 +65,16 @@ func Item(item *todo.Item) templ.Component {
 		if err != nil {
 			return err
 		}
-		_, err = templBuffer.WriteString("\" class=\"right btn contrast\">")
+		_, err = templBuffer.WriteString("\" class=\"outline secondary focus:outline focus:outline-red-500 focus:outline-4 mr-2\">")
 		if err != nil {
 			return err
 		}
-		var_2 := `❌`
-		_, err = templBuffer.WriteString(var_2)
-		if err != nil {
-			return err
-		}
-		_, err = templBuffer.WriteString("</button></form><form method=\"GET\" action=\"")
-		if err != nil {
-			return err
-		}
-		_, err = templBuffer.WriteString(templ.EscapeString("/items/" + item.ID.String()))
-		if err != nil {
-			return err
-		}
-		_, err = templBuffer.WriteString("\" class=\"\" role=\"group\"><button type=\"submit\" hx-target=\"closest div\" hx-swap=\"outerHTML\" hx-get=\"")
-		if err != nil {
-			return err
-		}
-		_, err = templBuffer.WriteString(templ.EscapeString("/items/" + item.ID.String()))
-		if err != nil {
-			return err
-		}
-		_, err = templBuffer.WriteString("\" class=\"right btn outline secondary\">")
-		if err != nil {
-			return err
-		}
-		var_3 := `📝`
+		var_3 := `❌`
 		_, err = templBuffer.WriteString(var_3)
 		if err != nil {
 			return err
 		}
-		_, err = templBuffer.WriteString("</button></form>")
+		_, err = templBuffer.WriteString("</button></form></li><li style=\"width: 100%;\">")
 		if err != nil {
 			return err
 		}
@@ -99,7 +99,7 @@ func Item(item *todo.Item) templ.Component {
 		if err != nil {
 			return err
 		}
-		_, err = templBuffer.WriteString("\" role=\"group\"><input type=\"hidden\" name=\"completed\"")
+		_, err = templBuffer.WriteString("\"><input type=\"hidden\" name=\"completed\"")
 		if err != nil {
 			return err
 		}
@@ -122,7 +122,22 @@ func Item(item *todo.Item) templ.Component {
 		if err != nil {
 			return err
 		}
-		_, err = templBuffer.WriteString("\"><span hx-patch=\"")
+		_, err = templBuffer.WriteString("\"><noscript><input type=\"submit\"")
+		if err != nil {
+			return err
+		}
+		if item.Completed {
+			_, err = templBuffer.WriteString(" value=\"Set as Not Completed\"")
+			if err != nil {
+				return err
+			}
+		} else {
+			_, err = templBuffer.WriteString(" value=\"Set as Completed\"")
+			if err != nil {
+				return err
+			}
+		}
+		_, err = templBuffer.WriteString(" class=\"mr-2\"></noscript><strong><span hx-patch=\"")
 		if err != nil {
 			return err
 		}
@@ -139,7 +154,7 @@ func Item(item *todo.Item) templ.Component {
 		if err != nil {
 			return err
 		}
-		_, err = templBuffer.WriteString("</span></form><input type=\"hidden\" name=\"id\" value=\"")
+		_, err = templBuffer.WriteString("</span></strong></form><input type=\"hidden\" name=\"id\" value=\"")
 		if err != nil {
 			return err
 		}
@@ -147,7 +162,7 @@ func Item(item *todo.Item) templ.Component {
 		if err != nil {
 			return err
 		}
-		_, err = templBuffer.WriteString("\"></div>")
+		_, err = templBuffer.WriteString("\"></li></ul></nav></div>")
 		if err != nil {
 			return err
 		}

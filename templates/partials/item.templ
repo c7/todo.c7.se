@@ -3,65 +3,86 @@ package partials
 import "github.com/c7/todo.c7.se/todo"
 
 templ Item(item *todo.Item) {
-  <div class="draggable">
-    <form
-      method="POST"
-      action={ "/items/"+item.ID.String()+"/delete" }
-      class="inline"
-      role="group"
+	<div class="block py-2 border-b-4 border-dotted border-red-900 draggable">
+    <nav>
+    <ul style="width: 100%;">
+      <li>
+		<form
+			method="GET"
+			action={ "/items/"+item.ID.String() }
+			class="inline"
     >
-      <button
-        type="submit"
-        hx-target="closest div"
-        hx-swap="outerHTML"
-        hx-delete={ "/items/"+item.ID.String() }
-        class="right btn contrast"
-      >
-      ❌
-      </button>
-    </form>
-    <form
-      method="GET"
-      action={ "/items/"+item.ID.String() }
-      class=""
-      role="group"
-    >
-      <button
-        type="submit"
-        hx-target="closest div"
-        hx-swap="outerHTML"
-        hx-get={ "/items/"+item.ID.String() }
-        class="right btn outline secondary"
-      >
-      📝
-      </button>
-    </form>
-    <form
-      method="POST"
-      action={ "/items/"+item.ID.String()+"/edit" }
-      hx-target="closest div"
-      hx-swap="outerHTML"
-      class={ "inline", templ.KV("line-through", item.Completed) }
-      role="group"
-    >
-      <input
-        type="hidden"
-        name="completed"
-        if !item.Completed {
-          value="true"
-        } else {
-          value="false"
-        }
-      />
-      <input
-        type="hidden"
-        name="description"
-        value={ item.Description }
-      />
-      <span hx-patch={ "/items/"+item.ID.String() }>
-        { item.Description }
-      </span>
-    </form>
-    <input type="hidden" name="id" value={ item.ID.String() } />
+			<button
+				type="submit"
+				hx-target="closest div"
+				hx-swap="outerHTML"
+				hx-get={ "/items/"+item.ID.String() }
+				class="outline primary focus:outline focus:outline-red-500 focus:outline-4 mr-2"
+			>
+				📝
+			</button>
+		</form>
+        </li>
+
+      <li>
+      <form
+			method="POST"
+			action={ "/items/"+item.ID.String()+"/delete" }
+			class="inline"
+		>
+			<button
+				type="submit"
+				hx-target="closest div"
+				hx-swap="outerHTML"
+				hx-delete={ "/items/"+item.ID.String() }
+				class="outline secondary focus:outline focus:outline-red-500 focus:outline-4 mr-2"
+			>
+				❌
+			</button>
+		</form>
+      </li>
+      <li style="width: 100%;">
+		<form
+			method="POST"
+			action={ "/items/"+item.ID.String()+"/edit" }
+			hx-target="closest div"
+			hx-swap="outerHTML"
+			class={ "inline", templ.KV("line-through", item.Completed) }
+		>
+			<input
+				type="hidden"
+				name="completed"
+				if !item.Completed {
+					value="true"
+				} else {
+					value="false"
+				}
+			/>
+			<input
+				type="hidden"
+				name="description"
+				value={ item.Description }
+			/>
+			<noscript>
+				<input
+					type="submit"
+					if item.Completed {
+						value="Set as Not Completed"
+					} else {
+						value="Set as Completed"
+					}
+					class="mr-2"
+				/>
+			</noscript>
+      <strong>
+        <span hx-patch={ "/items/"+item.ID.String() }>
+				{ item.Description }
+        </span>
+      </strong>
+		</form>
+		<input type="hidden" name="id" value={ item.ID.String() } />
+      </li>
+    </ul>
+	  </nav>
   </div>
 }

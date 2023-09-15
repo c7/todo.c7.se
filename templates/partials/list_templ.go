@@ -24,7 +24,7 @@ func List(list todo.List) templ.Component {
 			var_1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, err = templBuffer.WriteString("<form hx-post=\"/items/sort\" hx-trigger=\"end\" class=\"\"><div id=\"items\" class=\"sortable\">")
+		_, err = templBuffer.WriteString("<form hx-post=\"/items/sort\" hx-trigger=\"end\" class=\"block p-0 mb-2 text-lg\"><div id=\"items\" class=\" sortable\">")
 		if err != nil {
 			return err
 		}
@@ -34,7 +34,7 @@ func List(list todo.List) templ.Component {
 				return err
 			}
 		}
-		_, err = templBuffer.WriteString("<div id=\"no-items\" class=\"hidden\"><p>")
+		_, err = templBuffer.WriteString("<div id=\"no-items\" class=\"hidden first:block first:pb-2 first:pt-3\"><p>")
 		if err != nil {
 			return err
 		}
