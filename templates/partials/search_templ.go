@@ -39,7 +39,7 @@ func Search(term string) templ.Component {
 		if err != nil {
 			return err
 		}
-		_, err = templBuffer.WriteString("\" type=\"text\" placeholder=\"Begin typing to search...\" hx-get=\"/items\" hx-target=\"#items\" hx-trigger=\"keyup changed, search\" hx-replace=\"innerHTML\" class=\"\"></label></form>")
+		_, err = templBuffer.WriteString("\" type=\"text\" placeholder=\"Begin typing to search...\" hx-get=\"/items\" hx-target=\"#items\" hx-trigger=\"keyup changed, search\" hx-replace=\"innerHTML\"></label></form>")
 		if err != nil {
 			return err
 		}

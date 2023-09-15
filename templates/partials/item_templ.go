@@ -24,7 +24,7 @@ func Item(item *todo.Item) templ.Component {
 			var_1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, err = templBuffer.WriteString("<div class=\"block py-2 border-b-4 border-dotted border-red-900 draggable\"><nav><ul style=\"width: 100%;\"><li><form method=\"GET\" action=\"")
+		_, err = templBuffer.WriteString("<div class=\"draggable\"><nav><ul style=\"width: 100%;\"><li><form method=\"GET\" action=\"")
 		if err != nil {
 			return err
 		}
@@ -32,7 +32,7 @@ func Item(item *todo.Item) templ.Component {
 		if err != nil {
 			return err
 		}
-		_, err = templBuffer.WriteString("\" class=\"inline\"><button type=\"submit\" hx-target=\"closest div\" hx-swap=\"outerHTML\" hx-get=\"")
+		_, err = templBuffer.WriteString("\"><button type=\"submit\" hx-target=\"closest div\" hx-swap=\"outerHTML\" hx-get=\"")
 		if err != nil {
 			return err
 		}
@@ -40,7 +40,7 @@ func Item(item *todo.Item) templ.Component {
 		if err != nil {
 			return err
 		}
-		_, err = templBuffer.WriteString("\" class=\"outline primary focus:outline focus:outline-red-500 focus:outline-4 mr-2\">")
+		_, err = templBuffer.WriteString("\" class=\"outline primary\">")
 		if err != nil {
 			return err
 		}
@@ -57,7 +57,7 @@ func Item(item *todo.Item) templ.Component {
 		if err != nil {
 			return err
 		}
-		_, err = templBuffer.WriteString("\" class=\"inline\"><button type=\"submit\" hx-target=\"closest div\" hx-swap=\"outerHTML\" hx-delete=\"")
+		_, err = templBuffer.WriteString("\"><button type=\"submit\" hx-target=\"closest div\" hx-swap=\"outerHTML\" hx-delete=\"")
 		if err != nil {
 			return err
 		}
@@ -65,7 +65,7 @@ func Item(item *todo.Item) templ.Component {
 		if err != nil {
 			return err
 		}
-		_, err = templBuffer.WriteString("\" class=\"outline secondary focus:outline focus:outline-red-500 focus:outline-4 mr-2\">")
+		_, err = templBuffer.WriteString("\" class=\"outline secondary\">")
 		if err != nil {
 			return err
 		}
@@ -137,7 +137,7 @@ func Item(item *todo.Item) templ.Component {
 				return err
 			}
 		}
-		_, err = templBuffer.WriteString(" class=\"mr-2\"></noscript><strong><span hx-patch=\"")
+		_, err = templBuffer.WriteString("></noscript><strong><span hx-patch=\"")
 		if err != nil {
 			return err
 		}

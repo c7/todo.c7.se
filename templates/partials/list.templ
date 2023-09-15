@@ -6,13 +6,12 @@ templ List(list todo.List) {
 	<form
 		hx-post="/items/sort"
 		hx-trigger="end"
-		class="block p-0 mb-2 text-lg"
 	>
-		<div id="items" class=" sortable">
+		<div id="items" class="sortable">
 			for _, item := range list {
 				@Item(item)
 			}
-			<div id="no-items" class="hidden first:block first:pb-2 first:pt-3">
+			<div id="no-items" class="hidden">
 				<p>Congrats, you have no more TODO items! Or... do you? 🤔</p>
 			</div>
 		</div>

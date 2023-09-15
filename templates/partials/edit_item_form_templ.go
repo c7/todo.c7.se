@@ -24,7 +24,7 @@ func EditItemForm(item *todo.Item) templ.Component {
 			var_1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, err = templBuffer.WriteString("<div class=\"block draggable\"><input type=\"hidden\" name=\"id\" value=\"")
+		_, err = templBuffer.WriteString("<div class=\"draggable\"><input type=\"hidden\" name=\"id\" value=\"")
 		if err != nil {
 			return err
 		}
@@ -48,7 +48,7 @@ func EditItemForm(item *todo.Item) templ.Component {
 		if err != nil {
 			return err
 		}
-		_, err = templBuffer.WriteString("\" class=\"\"><input type=\"hidden\" name=\"completed\"")
+		_, err = templBuffer.WriteString("\"><input type=\"hidden\" name=\"completed\"")
 		if err != nil {
 			return err
 		}

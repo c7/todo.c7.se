@@ -3,21 +3,20 @@ package partials
 import "github.com/c7/todo.c7.se/todo"
 
 templ Item(item *todo.Item) {
-	<div class="block py-2 border-b-4 border-dotted border-red-900 draggable">
+	<div class="draggable">
     <nav>
     <ul style="width: 100%;">
       <li>
 		<form
 			method="GET"
 			action={ "/items/"+item.ID.String() }
-			class="inline"
     >
 			<button
 				type="submit"
 				hx-target="closest div"
 				hx-swap="outerHTML"
 				hx-get={ "/items/"+item.ID.String() }
-				class="outline primary focus:outline focus:outline-red-500 focus:outline-4 mr-2"
+				class="outline primary"
 			>
 				📝
 			</button>
@@ -28,14 +27,13 @@ templ Item(item *todo.Item) {
       <form
 			method="POST"
 			action={ "/items/"+item.ID.String()+"/delete" }
-			class="inline"
 		>
 			<button
 				type="submit"
 				hx-target="closest div"
 				hx-swap="outerHTML"
 				hx-delete={ "/items/"+item.ID.String() }
-				class="outline secondary focus:outline focus:outline-red-500 focus:outline-4 mr-2"
+				class="outline secondary"
 			>
 				❌
 			</button>
@@ -71,7 +69,6 @@ templ Item(item *todo.Item) {
 					} else {
 						value="Set as Completed"
 					}
-					class="mr-2"
 				/>
 			</noscript>
       <strong>

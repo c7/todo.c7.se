@@ -3,7 +3,7 @@ package partials
 import "github.com/c7/todo.c7.se/todo"
 
 templ EditItemForm(item *todo.Item) {
-  <div class="block draggable">
+  <div class="draggable">
     <input type="hidden" name="id" value={ item.ID.String() } />
     <form
       method="POST"
@@ -11,7 +11,6 @@ templ EditItemForm(item *todo.Item) {
       hx-target="closest div"
       hx-swap="outerHTML"
       hx-patch={ "/items/"+item.ID.String() }
-      class=""
     >
       <input
         type="hidden"
