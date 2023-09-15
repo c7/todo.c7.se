@@ -4,21 +4,9 @@ import "github.com/c7/todo.c7.se/todo"
 
 templ Item(item *todo.Item) {
 	<div class="block py-2 border-b-4 border-dotted border-red-900 draggable">
-		<form
-			method="POST"
-			action={ "/items/"+item.ID.String()+"/delete" }
-			class="inline"
-		>
-			<button
-				type="submit"
-				hx-target="closest div"
-				hx-swap="outerHTML"
-				hx-delete={ "/items/"+item.ID.String() }
-				class="focus:outline focus:outline-red-500 focus:outline-4 mr-2"
-			>
-				❌
-			</button>
-		</form>
+    <nav>
+    <ul style="width: 100%;">
+      <li>
 		<form
 			method="GET"
 			action={ "/items/"+item.ID.String() }
@@ -29,11 +17,31 @@ templ Item(item *todo.Item) {
 				hx-target="closest div"
 				hx-swap="outerHTML"
 				hx-get={ "/items/"+item.ID.String() }
-				class="focus:outline focus:outline-red-500 focus:outline-4 mr-2"
+				class="outline primary focus:outline focus:outline-red-500 focus:outline-4 mr-2"
 			>
 				📝
 			</button>
 		</form>
+        </li>
+
+      <li>
+      <form
+			method="POST"
+			action={ "/items/"+item.ID.String()+"/delete" }
+			class="inline"
+		>
+			<button
+				type="submit"
+				hx-target="closest div"
+				hx-swap="outerHTML"
+				hx-delete={ "/items/"+item.ID.String() }
+				class="outline secondary focus:outline focus:outline-red-500 focus:outline-4 mr-2"
+			>
+				❌
+			</button>
+		</form>
+      </li>
+      <li style="width: 100%;">
 		<form
 			method="POST"
 			action={ "/items/"+item.ID.String()+"/edit" }
@@ -66,10 +74,15 @@ templ Item(item *todo.Item) {
 					class="mr-2"
 				/>
 			</noscript>
-			<span hx-patch={ "/items/"+item.ID.String() }>
+      <strong>
+        <span hx-patch={ "/items/"+item.ID.String() }>
 				{ item.Description }
-			</span>
+        </span>
+      </strong>
 		</form>
 		<input type="hidden" name="id" value={ item.ID.String() } />
-	</div>
+      </li>
+    </ul>
+	  </nav>
+  </div>
 }

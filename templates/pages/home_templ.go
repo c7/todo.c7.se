@@ -42,7 +42,7 @@ func Home(list todo.List) templ.Component {
 			if err != nil {
 				return err
 			}
-			err = partials.List(list).Render(ctx, templBuffer)
+			err = partials.AddItemForm().Render(ctx, templBuffer)
 			if err != nil {
 				return err
 			}
@@ -50,7 +50,7 @@ func Home(list todo.List) templ.Component {
 			if err != nil {
 				return err
 			}
-			err = partials.AddItemForm().Render(ctx, templBuffer)
+			err = partials.List(list).Render(ctx, templBuffer)
 			if err != nil {
 				return err
 			}
@@ -59,7 +59,7 @@ func Home(list todo.List) templ.Component {
 			}
 			return err
 		})
-		err = shared.Page("Home").Render(templ.WithChildren(ctx, var_2), templBuffer)
+		err = shared.Page("Todo").Render(templ.WithChildren(ctx, var_2), templBuffer)
 		if err != nil {
 			return err
 		}

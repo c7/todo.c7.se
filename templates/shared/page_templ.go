@@ -22,7 +22,7 @@ func Page(title string) templ.Component {
 			var_1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, err = templBuffer.WriteString("<!doctype html><html lang=\"en\" class=\"h-full\"><head><meta charset=\"UTF-8\"><title>")
+		_, err = templBuffer.WriteString("<!doctype html><html lang=\"en\"><head><meta charset=\"UTF-8\"><title>")
 		if err != nil {
 			return err
 		}
@@ -31,7 +31,7 @@ func Page(title string) templ.Component {
 		if err != nil {
 			return err
 		}
-		_, err = templBuffer.WriteString("</title><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"><meta name=\"robots\" content=\"index, follow\"><meta name=\"revisit-after\" content=\"7 days\"><meta name=\"language\" content=\"English\"><script src=\"https://unpkg.com/htmx.org@1.9.2\" integrity=\"sha384-L6OqL9pRWyyFU3+/bjdSri+iIphTN/bvYyM37tICVyOJkWZLpP2vGn6VUEXgzg6h\" crossorigin=\"anonymous\">")
+		_, err = templBuffer.WriteString("</title><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"><script src=\"/dist/htmx.min.js\">")
 		if err != nil {
 			return err
 		}
@@ -40,7 +40,7 @@ func Page(title string) templ.Component {
 		if err != nil {
 			return err
 		}
-		_, err = templBuffer.WriteString("</script><script src=\"https://unpkg.com/hyperscript.org@0.9.8\">")
+		_, err = templBuffer.WriteString("</script><script src=\"/dist/_hyperscript.min.js\">")
 		if err != nil {
 			return err
 		}
@@ -49,7 +49,7 @@ func Page(title string) templ.Component {
 		if err != nil {
 			return err
 		}
-		_, err = templBuffer.WriteString("</script><script src=\"https://unpkg.com/sortablejs@1.15.0\">")
+		_, err = templBuffer.WriteString("</script><script src=\"/dist/sortable.min.js\">")
 		if err != nil {
 			return err
 		}
@@ -67,16 +67,65 @@ func Page(title string) templ.Component {
 		if err != nil {
 			return err
 		}
-		_, err = templBuffer.WriteString("</script><link rel=\"stylesheet\" href=\"/dist/styles.css\"></head><body class=\"h-full bg-yellow-50 font-mono\"><section class=\"max-w-lg mx-auto my-2\"><h1 class=\"text-8xl font-black text-center m-0 pb-2\">")
+		_, err = templBuffer.WriteString("</script><link rel=\"stylesheet\" href=\"/dist/pico.min.css\"><link rel=\"stylesheet\" href=\"/dist/pico.colors.min.css\"><style>")
 		if err != nil {
 			return err
 		}
-		var_7 := `Todo`
+		var_7 := `
+        .hidden {
+          display: none;
+        }
+
+        .line-through {
+          text-decoration: line-through dashed;
+          text-decoration-thickness: 0.3rem;
+          text-decoration-style: wavy;
+          text-decoration-color: #cccccc;
+        }
+
+        .sortable-ghost {
+          background-color: #13171f;
+          outline-style: dashed;
+          outline-color: var(--pico-border-color);
+          outline-width: thick;
+        }
+
+        strong {
+          font-size: 1.5rem;
+        }
+      `
 		_, err = templBuffer.WriteString(var_7)
 		if err != nil {
 			return err
 		}
-		_, err = templBuffer.WriteString("</h1>")
+		_, err = templBuffer.WriteString("</style></head><body><main class=\"container\"><article class=\"grid\"><div><hgroup><h1>")
+		if err != nil {
+			return err
+		}
+		var_8 := `Todo`
+		_, err = templBuffer.WriteString(var_8)
+		if err != nil {
+			return err
+		}
+		_, err = templBuffer.WriteString("</h1><h2>")
+		if err != nil {
+			return err
+		}
+		var_9 := `An example application available to download from `
+		_, err = templBuffer.WriteString(var_9)
+		if err != nil {
+			return err
+		}
+		_, err = templBuffer.WriteString("<a href=\"https://github.com/c7/todo.c7.se/\">")
+		if err != nil {
+			return err
+		}
+		var_10 := `https://github.com/c7/todo.c7.se/`
+		_, err = templBuffer.WriteString(var_10)
+		if err != nil {
+			return err
+		}
+		_, err = templBuffer.WriteString("</a></h2></hgroup>")
 		if err != nil {
 			return err
 		}
@@ -84,7 +133,7 @@ func Page(title string) templ.Component {
 		if err != nil {
 			return err
 		}
-		_, err = templBuffer.WriteString("</section></body></html>")
+		_, err = templBuffer.WriteString("</div></article></main></body></html>")
 		if err != nil {
 			return err
 		}

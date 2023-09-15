@@ -7,7 +7,7 @@ import (
 )
 
 templ Item(item *todo.Item) {
-	@shared.Page("Todo") {
+	@shared.Page("Item") {
 		@partials.EditItemForm(item)
 	}
 }

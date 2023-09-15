@@ -22,7 +22,7 @@ func AddItemForm() templ.Component {
 			var_1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, err = templBuffer.WriteString("<form method=\"POST\" action=\"/items\" hx-post=\"/items\" hx-target=\"#no-items\" hx-swap=\"beforebegin\" class=\"inline\"><label class=\"flex items-center\"><span class=\"text-lg font-bold\">")
+		_, err = templBuffer.WriteString("<form method=\"POST\" action=\"/items\" hx-post=\"/items\" hx-target=\"#no-items\" hx-swap=\"beforebegin\" class=\"inline\"><label class=\"flex items-center\"><span class=\"\">")
 		if err != nil {
 			return err
 		}
@@ -31,7 +31,7 @@ func AddItemForm() templ.Component {
 		if err != nil {
 			return err
 		}
-		_, err = templBuffer.WriteString("</span><input type=\"text\" name=\"description\" class=\"ml-2 grow\" data-script=\"on keyup if the event&#39;s key is &#39;Enter&#39; set my value to &#39;&#39; trigger keyup\"></label></form>")
+		_, err = templBuffer.WriteString("</span><input type=\"text\" name=\"description\" class=\"ml-2 grow\" aria-invalid=\"false\" data-script=\"on keyup if the event&#39;s key is &#39;Enter&#39; set my value to &#39;&#39; trigger keyup\"></label></form>")
 		if err != nil {
 			return err
 		}

@@ -7,9 +7,9 @@ import (
 )
 
 templ Home(list todo.List) {
-	@shared.Page("Home") {
+	@shared.Page("Todo") {
 		@partials.Search("")
-		@partials.List(list)
 		@partials.AddItemForm()
+		@partials.List(list)
 	}
 }
