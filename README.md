@@ -8,7 +8,7 @@ Demonstration of a todo list application using:
 
 - [HTMX](https://htmx.org) : high power tools for HTML
 - [templ](https://templ.guide) : a simple templating language alternative for Go
-- [Tailwind CSS](https://tailwindcss.com) : a utility-first CSS framework
+- [PicoCSS](https://v2.picocss.com/docs/v2) : Minimal CSS Framework for semantic HTML
 
 ## Originals
 
