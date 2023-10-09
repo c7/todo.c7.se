@@ -16,6 +16,10 @@ Initially based on <https://github.com/stackus/todos>
 which in turn is based on <https://github.com/quii/todo>
 and <https://github.com/ndchorley/todo>
 
-## Minimal variant (Only using the Go standard library, unpkg and jsdelivr)
+## Minimal variant
+
+> [!NOTE]
+> Only using the [Go standard library](https://pkg.go.dev/std),
+> [unpkg](https://unpkg.com/) and [jsdelivr](https://www.jsdelivr.com/)
 
 <https://gist.github.com/peterhellberg/60dcccab932f8446bacd2ceb57ba603d>
