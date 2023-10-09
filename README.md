@@ -15,3 +15,7 @@ Demonstration of a todo list application using:
 Initially based on <https://github.com/stackus/todos>
 which in turn is based on <https://github.com/quii/todo>
 and <https://github.com/ndchorley/todo>
+
+## Minimal variant (Only using the Go standard library, unpkg and jsdelivr)
+
+<https://gist.github.com/peterhellberg/60dcccab932f8446bacd2ceb57ba603d>
